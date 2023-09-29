@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Col, ConfigProvider, Layout, Row } from "antd";
+import React from "react";
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ConfigProvider theme={{}}>
+      <Layout>
+        <Layout.Header>Head</Layout.Header>
+        <Layout.Content>
+          <Row>
+            <Col span={24}>
+              <p>
+                App Works with Ant Design and
+                <span className="text-gray-400">Tailwind</span>
+              </p>
+            </Col>
+          </Row>
+        </Layout.Content>
+        <Layout.Footer>Footer</Layout.Footer>
+      </Layout>
+    </ConfigProvider>
   );
-}
+};
 
 export default App;
