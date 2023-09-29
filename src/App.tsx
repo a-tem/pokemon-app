@@ -16,6 +16,7 @@ import { reducer } from "./state/reducer";
 import { ActionTypes } from "./state/actions";
 import { API_URL } from "./config/api.config";
 import { TextTransform, TextTransformations } from "./helpers";
+import Info from "./components/Info";
 
 const initialState: AppState = {
   term: "ditto",
@@ -99,7 +100,7 @@ const App: React.FC = () => {
           </Row>
 
           <Row align="middle" justify="center" className="pb-5">
-            <Col span={12}>{state!.data && <span>INFO BLOCK HERE</span>}</Col>
+            <Col span={12}>{state!.data && <Info data={state.data} />}</Col>
             <Col span={12}>{state!.data && <span>STATS BLOCK HERE</span>}</Col>
           </Row>
 
