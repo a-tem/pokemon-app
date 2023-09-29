@@ -1,4 +1,4 @@
-import { AppState } from "../models";
+import { AppState, Data } from "../models";
 import { ActionTypes, AppAction } from "./actions";
 
 export const reducer = (state: AppState, action: AppAction): AppState => {
@@ -8,7 +8,6 @@ export const reducer = (state: AppState, action: AppAction): AppState => {
         ...state,
         error: false,
         errorMessage: "",
-        // data: null,
         isLoading: true,
         term: action.payload as string,
       };
@@ -16,11 +15,7 @@ export const reducer = (state: AppState, action: AppAction): AppState => {
     case ActionTypes.LOADING_END: {
       return {
         ...state,
-        // error: false,
-        // errorMessage: "",
         isLoading: false,
-        // term: state.term,
-        // data: action?.payload as any, // todo: specify data
       };
     }
     case ActionTypes.FETCH_ERROR: {
@@ -40,7 +35,7 @@ export const reducer = (state: AppState, action: AppAction): AppState => {
         errorMessage: "",
         isLoading: false,
         term: state.term,
-        data: action?.payload as any, // todo: specify data
+        data: action?.payload as Data,
       };
     }
     default:
