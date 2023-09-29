@@ -1,11 +1,15 @@
 import { Col, ConfigProvider, Layout, Row } from "antd";
-import React from "react";
+import React, { useState } from "react";
+import SearchBar from "./components/SearchBar";
 
 const App: React.FC = () => {
+  const [term, setTerm] = useState("ditto");
   return (
     <ConfigProvider theme={{}}>
       <Layout>
-        <Layout.Header>Head</Layout.Header>
+        <Layout.Header>
+          <SearchBar term={term} setTerm={setTerm}></SearchBar>
+        </Layout.Header>
         <Layout.Content>
           <Row>
             <Col span={24}>
