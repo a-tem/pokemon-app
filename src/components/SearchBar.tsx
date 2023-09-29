@@ -12,7 +12,8 @@ const SearchBar: React.FC<{
       placeholder={children as string}
       onSearch={setTerm}
       value={inputValue}
-      onChange={(e) => setInputValue(e.target.value)}
+      // Note: toLowerCase here for prevent API errors caused Capital letters. Could be handled on the interceptor level, but it's too much for such simple app.
+      onChange={(e) => setInputValue(e.target.value.toLowerCase())}
     ></Input.Search>
   );
 };
