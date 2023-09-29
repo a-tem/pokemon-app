@@ -5,6 +5,7 @@ import axios, { AxiosError } from "axios";
 import { AppState } from "./models";
 import { reducer } from "./state/reducer";
 import { ActionTypes } from "./state/actions";
+import { API_URL } from "./config/api.config";
 
 const initialState: AppState = {
   term: "ditto",
@@ -29,7 +30,7 @@ const App: React.FC = () => {
       let res = null;
 
       try {
-        res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${term}`); // todo: move URL to the config file.
+        res = await axios.get(`${API_URL}/${term}`);
       } catch (err: unknown) {
         dispatch({
           type: ActionTypes.FETCH_ERROR,
