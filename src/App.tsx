@@ -4,11 +4,14 @@ import SearchBar from "./components/SearchBar";
 
 const App: React.FC = () => {
   const [term, setTerm] = useState("ditto");
+
   return (
     <ConfigProvider theme={{}}>
       <Layout>
         <Layout.Header>
-          <SearchBar term={term} setTerm={setTerm}></SearchBar>
+          <SearchBar term={term} setTerm={setTerm}>
+            Enter a Pokemon name
+          </SearchBar>
         </Layout.Header>
         <Layout.Content>
           <Row>
