@@ -1,25 +1,33 @@
 import { ResponsiveRadar } from "@nivo/radar";
+import { Data } from "../models";
+import { TextTransform, TextTransformations } from "../helpers";
 
-const fakeData = [
-  {
-    value: Math.random() * 1000,
-    title: "Prop One",
-  },
-  {
-    value: Math.random() * 1000,
-    title: "Prop Two",
-  },
-  {
-    value: Math.random() * 1000,
-    title: "Prop Three",
-  },
-];
+type FCProps = {
+  stats: Data["stats"];
+};
 
-const Stats: React.FC = () => {
+type ChartStats = {
+  title: string;
+  value: number;
+};
+
+const transformStatsToChartData = (stats: FCProps["stats"]): ChartStats[] => {
+  return stats.reduce((acc, cur) => {
+    const entry: ChartStats = {
+      title: TextTransform(cur.stat.name, TextTransformations.capitalize),
+      value: cur.base_stat,
+    };
+    return [...acc, entry];
+  }, [] as ChartStats[]);
+};
+
+const Stats: React.FC<FCProps> = ({ stats }) => {
+  const dataForChart = transformStatsToChartData(stats);
+
   return (
     <div style={{ height: "350px", width: "450px" }}>
       <ResponsiveRadar
-        data={fakeData}
+        data={dataForChart}
         keys={["value"]}
         indexBy="title"
         margin={{ top: 70, right: 80, bottom: 40, left: 80 }}

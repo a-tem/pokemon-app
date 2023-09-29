@@ -102,7 +102,9 @@ const App: React.FC = () => {
 
           <Row align="middle" justify="center" className="pb-5">
             <Col span={12}>{state!.data && <Info data={state.data} />}</Col>
-            <Col span={12}>{state!.data && <Stats />}</Col>
+            <Col span={12}>
+              {state!.data && <Stats stats={state.data.stats} />}
+            </Col>
           </Row>
 
           <Row>
