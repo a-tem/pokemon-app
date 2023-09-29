@@ -1,4 +1,13 @@
-import { Col, ConfigProvider, Layout, Row } from "antd";
+import {
+  Col,
+  ConfigProvider,
+  Divider,
+  Image,
+  Layout,
+  Result,
+  Row,
+  Spin,
+} from "antd";
 import React, { useEffect, useReducer, useState } from "react";
 import SearchBar from "./components/SearchBar";
 import axios, { AxiosError } from "axios";
@@ -6,6 +15,7 @@ import { AppState } from "./models";
 import { reducer } from "./state/reducer";
 import { ActionTypes } from "./state/actions";
 import { API_URL } from "./config/api.config";
+import { TextTransform, TextTransformations } from "./helpers";
 
 const initialState: AppState = {
   term: "ditto",
@@ -58,26 +68,68 @@ const App: React.FC = () => {
       }}
     >
       <Layout>
-        <Layout.Header>
+        <Layout.Header className="pt-6 pb-14">
           <SearchBar term={term} setTerm={setTerm}>
             Enter a Pokemon name
           </SearchBar>
         </Layout.Header>
         <Layout.Content>
+          <Row align="middle" justify="center" className="pt-4">
+            <Col span={12} className=" text-center">
+              <h1 className="text-6xl text-gray-600">
+                {TextTransform(state!.term, TextTransformations.upperCase)}
+              </h1>
+            </Col>
+
+            <Col span={12} className="flex items-center justify-center">
+              {state.data && (
+                <Image
+                  width={200}
+                  alt={state!.term}
+                  src={state.data!.sprites!.other!.dream_world!.front_default}
+                />
+              )}
+            </Col>
+          </Row>
+
           <Row>
             <Col span={24}>
-              <div>isLoading: {state.isLoading ? "Loading" : "Nope"}</div>
-              <div>error: {state.error ? "error" : "all is good"}</div>
-              <div>
-                errorMessage:{" "}
-                {state.errorMessage ? state.errorMessage : "no errors"}
-              </div>
-              <div>data {state.data ? "data exist" : "no data"}</div>
-              <div></div>
+              <Divider />
+            </Col>
+          </Row>
+
+          <Row align="middle" justify="center" className="pb-5">
+            <Col span={12}>{state!.data && <span>INFO BLOCK HERE</span>}</Col>
+            <Col span={12}>{state!.data && <span>STATS BLOCK HERE</span>}</Col>
+          </Row>
+
+          <Row>
+            <Col span={24} className="flex items-center justify-center">
+              {state.isLoading && <Spin size="large" className="p-8" />}
+            </Col>
+          </Row>
+
+          <Row>
+            <Col span={24}>
+              {state.error && (
+                <Result status="warning" title={state.errorMessage} />
+              )}
             </Col>
           </Row>
         </Layout.Content>
-        <Layout.Footer>Footer</Layout.Footer>
+        <Layout.Footer className="text-center">
+          <Divider />
+          <p>
+            <span>Pokemon API: </span>
+            <a
+              href="https://pokeapi.co/docs/v2#pokemon"
+              target="_blank"
+              rel="noreferrer"
+            >
+              https://pokeapi.co/docs/v2#pokemon
+            </a>
+          </p>
+        </Layout.Footer>
       </Layout>
     </ConfigProvider>
   );
