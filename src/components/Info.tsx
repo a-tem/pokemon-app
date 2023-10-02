@@ -55,7 +55,7 @@ const Info: React.FC<FCProps> = ({ data }) => {
     <>
       <div className="flex flex-col justify-center w-full">
         {plain.map(([title, key, value]) => (
-          <div className="flex p-2" key={key}>
+          <div className="flex p-2" key={key} data-testid="info-plain">
             {renderTitle(title)}
             <span className="flex grow gap-4 justify-start text-lg text-gray-700">
               {key === "id" && <span>#{value}</span>}
@@ -67,7 +67,7 @@ const Info: React.FC<FCProps> = ({ data }) => {
 
         {list.map(([title, key, value]) => {
           return (
-            <div className="flex p-2" key={key}>
+            <div className="flex p-2" key={key} data-testid="info-list">
               {renderTitle(title)}
               <span className="flex grow gap-4 justify-start text-lg text-gray-700">
                 {renderTagsList(value.map((v: any) => v[key].name))}
