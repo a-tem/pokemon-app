@@ -4,11 +4,12 @@ import { ReactNode, useState } from "react";
 const SearchBar: React.FC<{
   term: string;
   setTerm: (searchTerm: string) => void;
-  children: ReactNode;
+  children?: ReactNode;
 }> = ({ term, setTerm, children }) => {
   const [inputValue, setInputValue] = useState(term);
   return (
     <Input.Search
+      data-testid="search-box"
       placeholder={children as string}
       onSearch={setTerm}
       value={inputValue}
