@@ -107,6 +107,7 @@ const App: React.FC = () => {
             </Col>
           </Row>
 
+          {/* ToDo: Spinner looks awkward, better to use Skeleton for sections. */}
           <Row>
             <Col span={24} className="flex items-center justify-center">
               {state.isLoading && <Spin size="large" className="p-8" />}

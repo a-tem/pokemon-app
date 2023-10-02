@@ -1,9 +1,14 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import App from "./App";
 
-test('renders learn react link', () => {
+test("App renders layout", async () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const header = screen.getByRole("banner");
+  const content = screen.getByRole("main");
+  const footer = screen.getByRole("contentinfo");
+
+  expect(header).toBeVisible();
+  expect(content).toBeVisible();
+  expect(footer).toBeVisible();
 });
